@@ -1,0 +1,37 @@
+@keyframes menu-translate { /* When the page is loaded, the dishes appear with a slight delay in time */
+    from {
+        transform: translateY(30%);
+        opacity: 0%;
+    }
+    to {
+        transform: translateY(0%);
+        opacity:100%;
+    }
+}
+
+/*
+Loading spinner
+*/
+@keyframes opacity-loading { /* The 'loading spinner' partially hides the content of the page when displayed */
+    to {
+        opacity:0;
+        z-index: -9999;
+    }
+}
+
+@keyframes spin { /* Makes the circle inside the 'loading spinner' spin */
+    to {transform: rotate(360deg);}
+}
+
+/*
+Heart button
+*/
+@keyframes heart-filled-opacity{ /* Fill the heart on hover */
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+@keyframes heart-outline-opacity { /* Hide the outline on hover */
+    from { opacity: 1;}
+    to { opacity: 0;}
+}

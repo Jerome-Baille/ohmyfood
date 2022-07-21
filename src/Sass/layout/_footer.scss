@@ -1,0 +1,27 @@
+.footer{
+    background-color: $background-footer;
+    color: white;
+    padding: 2rem;
+    &__logo {
+        font-family: "Shrikhand", "cursive";
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    & ul{
+        list-style-type: none;
+        padding: 1rem 0 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        row-gap: 1rem;
+        font-size: 1.5rem;
+        & a:hover {
+            opacity: 0.5;
+        }
+    }
+    &__icon{
+        font-size: 1rem;
+        padding-right: 1rem;
+    }
+}

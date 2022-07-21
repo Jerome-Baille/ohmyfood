@@ -1,14 +1,14 @@
 const Footer = () => {
     return (
-        <footer class="footer">
-            <div class="main-container">
-                <span class="footer__logo">ohmyfood</span>
+        <footer className="footer">
+            <div className="main-container">
+                <span className="footer__logo">ohmyfood</span>
                 <ul>
                     <li>
-                    <a href="#"><i class="fas fa-utensils footer__icon"></i>Proposer un restaurant</a>
+                    <a href="#"><i className="fas fa-utensils footer__icon"></i>Proposer un restaurant</a>
                     </li>
                     <li>
-                    <a href="#"><i class="fas fa-hands-helping footer__icon"></i>Devenir partenaire</a>
+                    <a href="#"><i className="fas fa-hands-helping footer__icon"></i>Devenir partenaire</a>
                     </li>
                     <li>
                     <a href="#">Mentions légales</a>

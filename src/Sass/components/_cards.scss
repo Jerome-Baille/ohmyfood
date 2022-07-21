@@ -1,0 +1,74 @@
+.card { /* Display restaurants on index and menu elements on menu pages */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover{ /* Increase the shaddow of the card on hover */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    &__new { /* For the green label 'Nouveau' over the restaurants on the index page */
+        background-color: $colour-tertiary;
+        color: darken($colour-tertiary, 40%); /* The color of the font is a darker version of the background for graphic coherence */
+        padding: 0.5rem 1rem;
+        border-radius: 0.125rem;
+        position: absolute;
+        top: 1rem;
+        right: 0.75rem;
+        font-weight: bold;
+
+        &--disable { /* Hide the label if the restaurant is not new */
+            display: none;
+        }
+    }
+    & img{
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+    }
+
+    &__caption{ /*Text section at the bottom of the card */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        overflow: hidden;
+        padding: 1rem;
+        &__text{
+            width:100%;
+            & h3 {
+                margin: 0;
+                font-size: 1.25rem;
+                @include ellipsis; /* Truncates the text to gain space (for smaller screens or when the check box is revealed) */
+            }
+            &>p {
+                font-size: 1.25rem;
+                margin: 0.25rem 0;
+            }
+            & div {
+                display:flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                font-size: 1rem;
+                & p {
+                    margin: 0;
+                    @include ellipsis;
+                }
+                & span{
+                    margin-left: 1rem;
+                    font-size: 1.25rem;
+                    line-height: 1.25rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

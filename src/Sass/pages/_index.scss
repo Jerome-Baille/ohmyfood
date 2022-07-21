@@ -1,0 +1,93 @@
+.description { /* The button displayed can be found in the 'components' folder */
+    background-color: $background-light;
+    @include flex-center;
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 2rem;
+    & h2 {
+        margin: 0;
+        font-weight: bolder;
+    }
+    & p {
+        font-size: 1.25rem;
+        font-weight: 300;
+        padding-bottom: 1rem;
+    }
+}
+
+.howTo {
+    padding: 2rem 1rem;
+    &__list{
+        width: 100%;
+        padding: 1rem 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Display 1 column on mobiles */
+        @include tablet {
+            grid-template-columns: repeat(2, 1fr); /* Display 2 columns on tablets */
+        }
+        @include desktop {
+            grid-template-columns: repeat(3, 1fr); /* Display 3 columns on larger screens */
+        }
+        gap: 2rem;
+        list-style: none;
+        &__element {
+            display: flex;
+            width: 100%;
+            &__number {
+                border: none;
+                border-radius: 2rem;
+                padding: 0.5rem 0.75rem;
+                margin: auto;
+                margin-right: -1rem; /* Force the number to be over the card and not next to it */
+                z-index: 1000; /* Makes sure that the number appears above the card */
+                font-size: 1rem;
+                line-height: 1rem;
+                background-color: $colour-primary;
+                color: white;
+            }
+            &__content {
+                width: 100%;
+                border: 0;
+                padding: 1.5rem;
+                border-radius: 20px;
+                box-shadow: 0.25rem 0.25rem 10px rgba(0, 0, 0, 0.25);
+                background-color: lighten($color: #F2F2F2, $amount: 2%);
+                font-weight: bold;
+                &:hover {
+                    background-color: lighten($colour-primary, $amount: 35%);
+                    cursor: default; /* Avoid confusion since those are not clickable cards */
+                    & i {
+                        color: $colour-primary;
+                    }
+                }
+                & i {
+                    padding-left: 1rem;
+                    color: lighten($color: black, $amount: 50%);
+                }
+                & span {
+                    padding: 0 1rem;
+                }
+            }
+        }
+    }
+}
+
+.restaurants {
+    background-color : $background-light;
+    padding: 2rem 1rem 5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    &__grid-container { /* Display on column on mobile and 2 columns on bigger screens (tablet and desktop) */
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 2rem;
+        row-gap: 2rem;
+        width: 100%;
+        @include mobile {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+}

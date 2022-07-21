@@ -1,0 +1,55 @@
+.btn { /* Button 'explorer nos restaurants' on the main page and 'Commander' on menu pages */
+    margin: auto;
+    @include flex-center;
+    max-width: fit-content;
+    padding: 1.5rem 4rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    border-radius: 10rem;
+    color: white;
+    background-image: linear-gradient(to top left, $colour-primary, $colour-secondary);
+    cursor: pointer;
+    box-shadow: 0.25rem 0.25rem 10px rgba(0, 0, 0, 0.25);
+    &:hover{
+        background-image: linear-gradient(to top left, lighten($color: $colour-primary, $amount: 5%), lighten($color: $colour-secondary, $amount: 5%)); /* lighten the color of the button on hover*/
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+    }
+    &__heart {
+        height: 2rem;
+        width: 2rem;
+        border: none;
+        @include flex-center;
+        cursor: pointer;
+        position: relative;
+        background-color: black;
+        font-size: 2rem;
+        padding: 1rem;
+        z-index: 99; /* Make sure that the heart button is not cropped by another element */
+        &--whiteBg{
+            background-color: white !important; /* Used for the index page */
+        }
+        & i, & svg {
+            background-color : $background-light;
+            mix-blend-mode: lighten; /* mix the heart with the parent element to reveal the color */
+            position: absolute;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .8s;
+            background-image: linear-gradient(to top left, $colour-primary, $colour-secondary);
+        }
+        &:hover:before {
+            animation: heart-filled-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Reveal the filled version of the heart blended with the linear-gradient of the parent div */
+        }
+        &:hover .far {
+            animation: heart-outline-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Hide the outline version of the heart*/
+        }
+    }
+}

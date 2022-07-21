@@ -1,0 +1,19 @@
+.localisation { /* In the future the clients will be able to enter the name of a city hence the form */
+    @include flex-center;
+    font-size: 1.5rem;
+    background-color: darken($color: #F2F2F2, $amount: 5%);
+    &__logo {
+        padding-right: 1.5rem;
+    }
+    &__text, &__text::placeholder, &__text:focus {
+        font-weight: bold;
+        @include fonts(text);
+        border-style: none;
+        outline: none; /* hide the border and outline for better visual integration */
+        padding: 1rem 0;
+        width: 12rem;
+        background-color: inherit;
+        color: lighten($color: black, $amount: 30%);
+        text-transform: capitalize;
+    }
+}

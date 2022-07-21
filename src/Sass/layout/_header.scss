@@ -1,0 +1,19 @@
+.header {
+    padding: 1rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1000; /* makes sure that the logo is above the localisation to reveal a shaddow effect under the header */
+    &__logo {
+        @include fonts(logo-title);
+        font-size: 2rem;
+        text-align: center;
+        margin: 0;
+    }
+    &__arrow { /* Only appears on menu pages */
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+    }
+}

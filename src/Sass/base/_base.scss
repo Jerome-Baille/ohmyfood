@@ -1,0 +1,13 @@
+* {
+    @include fonts(text); /* Set 'Roboto' as the main font*/
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit; /* Unset the color of the link for uniformisation on the page */
+    text-decoration: none; /* set to none to uniformise the appearance of the links */
+}
+
+h2 {
+    font-size: 2rem;
+}

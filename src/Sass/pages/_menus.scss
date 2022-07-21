@@ -1,0 +1,97 @@
+.menu {
+    background-color : $background-light;
+    border-radius: 50px 50px 0 0;
+    margin-top: -6rem;
+    z-index: 1000;
+    position: relative;
+    padding: 1.5rem;
+    &>div:last-child{ /* adds padding to the last div of menu (the 'order' button */
+        padding: 2.5rem 0;
+    }
+    &__img { /* Container of the image */
+        width: 100%;
+        height: 25rem;
+        &__content{ /* Image of a dish from the restaurant */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            &--large{ /* Hide the high resolution image of small screens */
+                display: none;
+            }
+            @include desktop { /* On large screens the small image is hidden and the high resolution one is displayed*/
+                &--small{
+                    display: none;
+                }
+                &--large{
+                    display: block;
+                }
+            }
+        }
+    }
+    &__header{
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        padding-right: 2rem;
+        & h2 {
+            @include fonts(logo-title);
+        }
+    }
+    &__course { /* Container of the different courses */
+        @for $i from 1 through 4 { /* Increase the delay by 0.2s on each element so that they appear one after the other */
+            &>div:nth-of-type(#{$i}){
+            animation: menu-translate 1s 0s+0.2s*$i backwards;
+            }
+        }
+        &__subtitle { /* Name of each course (starters, main courses and desserts)*/
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-weight: normal;
+            &::after{ /* Underlines a certain part of the subtitle */
+                content: "";
+                width: 3rem;
+                height: 0.25rem;
+                background-color: $colour-tertiary;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+        }
+        & .card__caption{        
+            & .check-box {
+                position: absolute;
+                @include flex-center;
+                right: 0;
+                top:0;
+                height: 100%;
+                width: 20%;
+                background-color: $colour-tertiary;
+                transform: translateX(100%); /* the check-box is hidden next to the card */
+                transition: transform 0.2s;
+                & .fa-check-circle {
+                    font-size: 1.75rem;
+                    color: white;
+                    transform: rotate(0);
+                    transition: transform 0.5s ;
+                }
+            }
+            &:hover {
+                & .check-box {
+                    transform: translateX(0%); /* On hover the check-box slides to be revealed */
+                    & .fa-check-circle{
+                        transform: rotate(360deg); /* Makes the check sign spin */
+                    }
+                }
+                & .card__caption__text {
+                    width: 80%; /* Reduce the size of the text section to provide space for the check-box */
+                    padding-right: 1rem;
+                }
+            }
+            .card__caption__text {
+                width: 100%;
+                transition: width 0.2s;
+            }
+        }
+    }
+}

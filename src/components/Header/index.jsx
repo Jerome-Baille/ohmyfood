@@ -1,8 +1,8 @@
 const Header = () => {
     return (
-        <header class="header">
+        <header className="header">
             <a href="./index.html">
-                <h1 class="header__logo">ohmyfood</h1>
+                <h1 className="header__logo">ohmyfood</h1>
             </a>
         </header>
     )
