@@ -7,6 +7,12 @@ import { HashLink as Link } from 'react-router-hash-link';
 import data from '../../assets/data.json'
 
 const Home = () => {
+    const handleToggle = (key) => {
+        localStorage.getItem(key)? localStorage.removeItem(key) : localStorage.setItem(key, 'true');
+        const btn = document.getElementById(key);
+        localStorage.getItem(key)? btn.classList.add('btn__heart--clicked') : btn.classList.remove('btn__heart--clicked');
+    };
+
     if (data) {
         return(
             <main>
@@ -20,7 +26,8 @@ const Home = () => {
                         <div className="restaurants__grid-container">
                         
                         {Object.keys(data).map((restaurant, index) => (
-                            <Link key={index} className="card" to={'menu/'+restaurant}>
+                            <div className="card" key={index}>
+                                <Link className="card__link" to={'menu/'+restaurant}></Link>
                                 <img src={data[restaurant].imgSmall} alt={'Illustration du restaurant "'+ data[restaurant].name+'" à '+data[restaurant].localisation} />                    
                                 <span className="card__new">Nouveau</span>
                                 <div className="card__caption">
@@ -28,12 +35,12 @@ const Home = () => {
                                         <h3>{data[restaurant].name}</h3>
                                         <p>{data[restaurant].localisation}</p>
                                     </div>
-                                    <div className="btn__heart">
+                                    <button className={(localStorage.getItem(restaurant))? "btn__heart btn__heart--clicked" : "btn__heart"} id={restaurant} onClick = {() => handleToggle(restaurant)}>
                                         <FontAwesomeIcon icon={farHeart} className="far btn__heart--whiteBg"/>
                                         <FontAwesomeIcon icon={fasHeart} className="btn__heart--whiteBg" />
-                                    </div>
+                                    </button>
                                 </div>
-                            </Link>
+                            </div>
                         ))}
                         </div>
                     </div>

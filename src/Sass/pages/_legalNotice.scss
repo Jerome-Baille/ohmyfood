@@ -1,0 +1,7 @@
+.legal-notice {
+    padding: 50px;
+
+    & li:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}

@@ -45,11 +45,13 @@
             transition: .8s;
             background-image: linear-gradient(to top left, $colour-primary, $colour-secondary);
         }
-        &:hover:before {
-            animation: heart-filled-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Reveal the filled version of the heart blended with the linear-gradient of the parent div */
-        }
-        &:hover .far {
-            animation: heart-outline-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Hide the outline version of the heart*/
+        &--clicked {
+            &:before {
+                animation: heart-filled-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Reveal the filled version of the heart blended with the linear-gradient of the parent div */
+            }
+            & .far {
+                animation: heart-outline-opacity 0.8s cubic-bezier(0.1, -0.6, 0.2, 0) both; /* Hide the outline version of the heart*/
+            }
         }
     }
 }

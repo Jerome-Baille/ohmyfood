@@ -7,6 +7,12 @@ import data from '../../assets/data.json'
 const SinglePage = () => {
     const { id } = useParams();
 
+    const handleToggle = (key) => {
+        localStorage.getItem(key)? localStorage.removeItem(key) : localStorage.setItem(key, 'true');
+        const btn = document.getElementById(key);
+        localStorage.getItem(key)? btn.classList.add('btn__heart--clicked') : btn.classList.remove('btn__heart--clicked');
+    };
+
     if (data) {
         return (
             <main>
@@ -18,7 +24,7 @@ const SinglePage = () => {
                 <section className="menu main-container">
                     <header className="menu__header">
                         <h2>{data[id].name}</h2>
-                        <button className="btn__heart">
+                        <button className={(localStorage.getItem(id))? "btn__heart btn__heart--clicked" : "btn__heart"} id={id} onClick = {() => handleToggle(id)}>
                             <FontAwesomeIcon icon={farHeart} className="far"/>
                             <FontAwesomeIcon icon={fasHeart} />
                         </button>
