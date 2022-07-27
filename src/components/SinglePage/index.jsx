@@ -98,7 +98,7 @@ const SinglePage = () => {
                                 <div 
                                     key={index} 
                                     id={starter.id} 
-                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === starter.id))? "card card__caption selected" : "card card__caption"}
+                                    className={localStorage.getItem('order')&&(JSON.parse(localStorage.getItem('order')).find((el) => el.id === starter.id))? "card card__caption selected" : "card card__caption"}
                                     onClick={() => addToOrder(starter)}
                                 >
                                     <div className="card__caption__text">
@@ -122,7 +122,7 @@ const SinglePage = () => {
                                 <div 
                                     key={index} 
                                     id={main.id}
-                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === main.id))? "card card__caption selected" : "card card__caption"}
+                                    className={localStorage.getItem('order')&&(JSON.parse(localStorage.getItem('order')).find((el) => el.id === main.id))? "card card__caption selected" : "card card__caption"}
                                     onClick={() => addToOrder(main)}
                                 >
                                     <div className="card__caption__text">
@@ -148,7 +148,7 @@ const SinglePage = () => {
                                 <div 
                                     key={index} 
                                     id={dessert.id}
-                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === dessert.id))? "card card__caption selected" : "card card__caption"}
+                                    className={localStorage.getItem('order')&&(JSON.parse(localStorage.getItem('order')).find((el) => el.id === dessert.id))? "card card__caption selected" : "card card__caption"}
                                     onClick={() => addToOrder(dessert)}
                                 >
                                     <div className="card__caption__text">
