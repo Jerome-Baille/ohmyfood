@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ohmyfood/static/css/main.dbd6970b.css",
-    "main.js": "/ohmyfood/static/js/main.5341d773.js",
+    "main.js": "/ohmyfood/static/js/main.527b18fe.js",
     "static/js/787.56a433e2.chunk.js": "/ohmyfood/static/js/787.56a433e2.chunk.js",
     "index.html": "/ohmyfood/index.html",
     "main.dbd6970b.css.map": "/ohmyfood/static/css/main.dbd6970b.css.map",
-    "main.5341d773.js.map": "/ohmyfood/static/js/main.5341d773.js.map",
+    "main.527b18fe.js.map": "/ohmyfood/static/js/main.527b18fe.js.map",
     "787.56a433e2.chunk.js.map": "/ohmyfood/static/js/787.56a433e2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dbd6970b.css",
-    "static/js/main.5341d773.js"
+    "static/js/main.527b18fe.js"
   ]
 }
