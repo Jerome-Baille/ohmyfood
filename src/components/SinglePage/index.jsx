@@ -2,10 +2,69 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
+import { useState } from "react";
+
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+
 import data from '../../assets/data.json'
 
 const SinglePage = () => {
     const { id } = useParams();
+
+    // Open a modal to display success message
+    const [open, setOpen] = useState(false);
+
+    const handleClickToOpen = () => {
+    setOpen(true);
+    };
+    
+    const handleToClose = () => {
+    setOpen(false);
+    };
+
+    const addToOrder = (item) => {
+        var order = JSON.parse(localStorage.getItem('order'));
+        const selectedItem = document.getElementById(item.id);
+
+        if (order) {
+            const resultFind = order.find((el) => el.id === item.id);
+                if (resultFind) {
+                    for( var i = 0; i < order.length; i++){ 
+                        if ( order[i] === resultFind) { 
+                            order.splice(i, 1); 
+                            localStorage.setItem('order', JSON.stringify(order));
+                            selectedItem.classList.remove('selected');
+
+                            if(order.length === 0){
+                                localStorage.removeItem('order');
+                            }
+                        }
+                    }
+                } else {
+                    order.push(item);
+                    localStorage.setItem("order", JSON.stringify(order));
+                    selectedItem.classList.add('selected');
+            }
+        } else {
+            localStorage.setItem('order', JSON.stringify([item]));
+            selectedItem.classList.add('selected');
+        }
+    }
+
+    const getTotal = () => {
+        var order = JSON.parse(localStorage.getItem('order'));
+        var total = 0;
+        if (order) {
+            order.forEach(item => {
+                total += parseInt(item.price);
+            });
+        }
+        return total;
+    }
 
     const handleToggle = (key) => {
         localStorage.getItem(key)? localStorage.removeItem(key) : localStorage.setItem(key, 'true');
@@ -36,7 +95,12 @@ const SinglePage = () => {
                                 Entrées
                             </h3>
                             {data[id].starters.map((starter, index) => (
-                                <div key={index} className="card card__caption">
+                                <div 
+                                    key={index} 
+                                    id={starter.id} 
+                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === starter.id))? "card card__caption selected" : "card card__caption"}
+                                    onClick={() => addToOrder(starter)}
+                                >
                                     <div className="card__caption__text">
                                         <h3>{starter.name}</h3>
                                         <div>
@@ -55,7 +119,12 @@ const SinglePage = () => {
                             <h3 className="menu__course__subtitle">Plats</h3>
     
                             {data[id].mains.map((main, index) => (
-                                <div key={index} className="card card__caption">
+                                <div 
+                                    key={index} 
+                                    id={main.id}
+                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === main.id))? "card card__caption selected" : "card card__caption"}
+                                    onClick={() => addToOrder(main)}
+                                >
                                     <div className="card__caption__text">
                                         <h3>{main.name}</h3>
                                         <div>
@@ -76,7 +145,12 @@ const SinglePage = () => {
                             <h3 className="menu__course__subtitle">Desserts</h3>
                             
                             {data[id].desserts.map((dessert, index) => (
-                                <div key={index} className="card card__caption">
+                                <div 
+                                    key={index} 
+                                    id={dessert.id}
+                                    className={(JSON.parse(localStorage.getItem('order')).find((el) => el.id === dessert.id))? "card card__caption selected" : "card card__caption"}
+                                    onClick={() => addToOrder(dessert)}
+                                >
                                     <div className="card__caption__text">
                                         <h3>{dessert.name}</h3>
                                         <div>
@@ -94,8 +168,94 @@ const SinglePage = () => {
                     </div>
     
                     <div className="main-container">
-                        <a className="btn" href="#">Commander</a>
+                        <button className="btn" onClick={handleClickToOpen}>
+                            Commander
+                        </button>
                     </div>
+
+
+                    <Dialog open={open} onClose={handleToClose}>
+                        <DialogTitle textAlign="center">{localStorage.getItem('order')? "Commande réalisée avec succès !" : "Votre panier est vide !"}</DialogTitle>
+                        <DialogContent>
+                            {localStorage.getItem('order')?
+                            <table>
+                                {JSON.parse(localStorage.getItem('order')).find((el) => el.category === 'starters')? 
+                                    <thead>
+                                        <tr>
+                                            <th colSpan='3'>Entrées</th>
+                                        </tr>
+                                    </thead>
+                                : null
+                                }
+
+                                <tbody>
+                                    {localStorage.getItem('order')? 
+                                    JSON.parse(localStorage.getItem('order')).filter((el) => el.category === 'starters').map((el, index) => (
+                                        <tr key={index}>
+                                                <td colSpan={2}>
+                                                    {`${el.name} ${el.description.toLowerCase()}`}
+                                                </td>
+                                                <td>{el.price}€</td>
+                                        </tr>
+                                    )) : null}
+                                </tbody>
+
+                                {JSON.parse(localStorage.getItem('order')).find((el) => el.category === 'mains')? 
+                                    <thead>
+                                        <tr>
+                                            <th colSpan='3'>Plats</th>
+                                        </tr>
+                                    </thead>
+                                : null
+                                }
+                                <tbody>
+                                    {localStorage.getItem('order')? 
+                                    JSON.parse(localStorage.getItem('order')).filter((el) => el.category === 'mains').map((el, index) => (
+                                        <tr key={index}>
+                                                <td colSpan={2}>
+                                                    {`${el.name} ${el.description.toLowerCase()}`}
+                                                </td>
+                                                <td>{el.price}€</td>
+                                        </tr>
+                                    )) : null}
+                                </tbody>
+
+                                {JSON.parse(localStorage.getItem('order')).find((el) => el.category === 'desserts')? 
+                                    <thead>
+                                        <tr>
+                                            <th colSpan='3'>Desserts</th>
+                                        </tr>
+                                    </thead>
+                                : null
+                                }
+                                <tbody>
+                                    {localStorage.getItem('order')? 
+                                    JSON.parse(localStorage.getItem('order')).filter((el) => el.category === 'desserts').map((el, index) => (
+                                        <tr key={index}>
+                                                <td colSpan={2}>
+                                                    {`${el.name} ${el.description.toLowerCase()}`}
+                                                </td>
+                                                <td>{el.price}€</td>
+                                        </tr>
+                                    )) : null}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colSpan={2}>Total</th>
+                                        <th>{getTotal().toLocaleString()} €
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            : <p>Aucune commande enregistrée</p>}
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleToClose} 
+                                color="primary" autoFocus>
+                            Fermer
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
                     
                 </section>
             </main>

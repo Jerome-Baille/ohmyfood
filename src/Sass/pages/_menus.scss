@@ -76,7 +76,7 @@
                     transition: transform 0.5s ;
                 }
             }
-            &:hover {
+            &.selected {
                 & .check-box {
                     transform: translateX(0%); /* On hover the check-box slides to be revealed */
                     & .fa-check-circle{
@@ -92,6 +92,51 @@
                 width: 100%;
                 transition: width 0.2s;
             }
+        }
+    }
+}
+
+table {
+    // border: 1px solid darkblue;
+
+    & thead {
+        & th {
+            border: 1px solid $colour-primary;
+            line-height: 30px;
+        }
+    }
+
+
+    & tr {
+        line-height: 20px;
+
+        &:first-of-type td {
+            padding-top: 20px;
+        }
+
+        & td {
+            padding : 10px 0;
+        }
+
+        &:last-of-type td {
+            padding-bottom: 40px;
+        }
+
+        & td:last-of-type {
+            padding-left: 10px;
+        }
+
+        & .table-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 400px;
+        }
+    }
+
+    & tfoot {
+        & th {
+            line-height: 50px;
         }
     }
 }
